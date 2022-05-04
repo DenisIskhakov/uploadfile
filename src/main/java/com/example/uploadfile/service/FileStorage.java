@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 
 @Service
 public class FileStorage {
-    private final Path rootDir = Paths.get("uploadDir");
+    private final Path rootDir = Paths.get("uploadDir"); // /uploadDir
 
     public Path store(MultipartFile file) {
         try {
@@ -28,7 +28,7 @@ public class FileStorage {
         } catch (IOException e) {
             throw new RuntimeException("MultipartFile stream exception");
         }
-        return rootDir.resolve(file.getOriginalFilename());
+        return rootDir.resolve(file.getOriginalFilename()); // тоже имя ,что у оригинала
     }
 
     public Resource getFile(String filename) {
@@ -48,7 +48,7 @@ public class FileStorage {
 
     public void deleteAll() {
         try {
-            FileSystemUtils.deleteRecursively(rootDir);
+            FileSystemUtils.deleteRecursively(rootDir); // удалим все
         } catch (IOException e) {
             throw new RuntimeException("Deletion files ex");
         }

@@ -47,7 +47,7 @@ public class UploadController {
         return fileNames;
     }
 //
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/files/{filename:.+}") // сначала имя файла ,потом точка,потом "+" = это любые символы
     public ResponseEntity<Resource> getFile(@PathVariable String filename) {
         Resource resource = storage.getFile(filename);
         return ResponseEntity.ok()
@@ -74,6 +74,15 @@ public class UploadController {
         person.setImage(path + personDTO.getFile().getOriginalFilename());
         return repository.save(person);
     }
+//    @PostMapping("/files/employee/database")
+//   public Person savePersonImageDataBase(@ModelAttribute PersonDTO personDTO) {
+//
+//        storage.store(personDTO.getFile());
+//        Person person = new Person();
+//        person.setName(personDTO.getName());
+//      person.setImage(personDTO.getFile());
+//      return repository.save(person);
+//    }
 
     @GetMapping("/files/person")
     public List<Person> getAllPersons() {
